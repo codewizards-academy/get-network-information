@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Device Info</title>
+</head>
+<body>
+    <button onclick="getDeviceInfo()">Get Device Info</button>
+    <div id="device-info"></div>
+
+    <script>
+        function getDeviceInfo() {
+            const userAgent = navigator.userAgent;
+            const platform = navigator.platform;
+
+            const deviceInfo = {
+                userAgent: userAgent,
+                platform: platform,
+                os: getOS(userAgent),
+                deviceType: getDeviceType(userAgent)
+            };
+
+            document.getElementById('device-info').innerText = JSON.stringify(deviceInfo, null, 2);
+        }
+
+        function getOS(userAgent) {
+            if (userAgent.indexOf('Win') !== -1) return 'Windows';
+            if (userAgent.indexOf('Mac') !== -1) return 'MacOS';
+            if (userAgent.indexOf('Linux') !== -1) return 'Linux';
+            if (userAgent.indexOf('Android') !== -1) return 'Android';
+            if (userAgent.indexOf('like Mac') !== -1) return 'iOS';
+            return 'Unknown';
+        }
+
+        function getDeviceType(userAgent) {
+            if (/Mobi|Android/i.test(userAgent)) {
+                return 'Mobile';
+            }
+            if (/Tablet|iPad/i.test(userAgent)) {
+                return 'Tablet';
+            }
+            return 'Desktop';
+        }
+    </script>
+</body>
+</html>

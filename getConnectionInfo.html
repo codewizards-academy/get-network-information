@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getConnectionInfo() {
+    var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    
+    if (connection) {
+        console.log('Effective connection type: ' + connection.effectiveType);
+        console.log('Downlink speed: ' + connection.downlink + ' Mbps');
+        console.log('Round trip time: ' + connection.rtt + ' ms');
+        console.log('Data Saver mode: ' + connection.saveData);
+    } else {
+        console.log('Connection information is not available.');
+    }
+}
+
+getConnectionInfo();
+
+    </script>
+</body>
+</html>

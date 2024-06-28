@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getGeolocation() {
+    if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            console.log('Latitude: ' + position.coords.latitude);
+            console.log('Longitude: ' + position.coords.longitude);
+            console.log('Accuracy: ' + position.coords.accuracy + ' meters');
+        }, function(error) {
+            console.error('Error occurred: ' + error.message);
+        });
+    } else {
+        console.log('Geolocation is not available.');
+    }
+}
+
+getGeolocation();
+
+    </script>
+</body>
+</html>
