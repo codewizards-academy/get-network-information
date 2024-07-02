@@ -1,102 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
         // Browser and OS Information
-        console.log(navigator.userAgent);
-console.log(navigator.platform);
-console.log(navigator.appVersion);
-console.log(navigator.appCodeName);
+        console.log(navigator.userAgent);   // Eg: Get Browser
+        console.log(navigator.platform);    // Eg : Win32
+        console.log(navigator.appVersion);  // Eg: Get Browser Version
+        console.log(navigator.appCodeName); // Ex: Mozilla
 
-// Screen Information
-console.log(screen.width);
-console.log(screen.height);
-console.log(screen.availWidth);
-console.log(screen.availHeight);
-console.log(screen.colorDepth);
-console.log(screen.pixelDepth);
+        // Screen Information
+        console.log(screen.width);
+        console.log(screen.height);
+        console.log(screen.availWidth);
+        console.log(screen.availHeight);
+        console.log(screen.colorDepth);
+        console.log(screen.pixelDepth);
 
-// Browser Capabilities
-console.log(navigator.cookieEnabled);
-console.log(navigator.javaEnabled());
-console.log(navigator.onLine);
-console.log(navigator.language);
-console.log(navigator.doNotTrack);
+        // Browser Capabilities
+        console.log(navigator.cookieEnabled);
+        console.log(navigator.javaEnabled());
+        console.log(navigator.onLine);
+        console.log(navigator.language); // Get Browser Language
+        console.log(navigator.doNotTrack);
 
-// Network Information
-if ('connection' in navigator) {
-    console.log(navigator.connection.type);
-    console.log(navigator.connection.effectiveType);
-}
+        // Network Information - Done
+        if ('connection' in navigator) {
+            console.log(navigator.connection.type);
+            console.log(navigator.connection.effectiveType);
+        }
 
-// Geolocation
-if ('geolocation' in navigator) {
-    navigator.geolocation.getCurrentPosition(position => {
-        console.log(position.coords.latitude);
-        console.log(position.coords.longitude);
-        console.log(position.coords.altitude);
-        console.log(position.coords.accuracy);
-        console.log(position.coords.altitudeAccuracy);
-        console.log(position.coords.heading);
-        console.log(position.coords.speed);
-    });
-}
+        // Geolocation - Done
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(position => {
+                console.log(position.coords.latitude);
+                console.log(position.coords.longitude);
+                console.log(position.coords.altitude);
+                console.log(position.coords.accuracy);
+                console.log(position.coords.altitudeAccuracy);
+                console.log(position.coords.heading);
+                console.log("Speed " + position.coords.speed);
+            });
+        }
 
-// Hardware Information
-if ('deviceMemory' in navigator) {
-    console.log(navigator.deviceMemory);
-}
+        // Hardware Information
+        if ('deviceMemory' in navigator) {
+            console.log("deviceMemory " + navigator.deviceMemory);
+        }
 
-if ('hardwareConcurrency' in navigator) {
-    console.log(navigator.hardwareConcurrency);
-}
+        if ('hardwareConcurrency' in navigator) {
+            console.log("hardwareConcurrency " + navigator.hardwareConcurrency);
+        }
 
-// Clipboard API
-navigator.clipboard.readText().then(text => {
-    console.log('Clipboard text:', text);
+        // Clipboard API
+        navigator.clipboard.readText().then(text => {
+            console.log('Clipboard text:', text);
+        });
+
+        navigator.clipboard.writeText('Hello, world!').then(() => {
+            console.log('Text written to clipboard');
+        });
+
+
+        // Battery Status
+        if ('getBattery' in navigator) {
+            navigator.getBattery().then(battery => {
+                console.log('getBattery ' + battery.level);
+                console.log('getBattery charging ' + battery.charging);
+                console.log('getBattery chargingTime ' + battery.chargingTime);
+                console.log('getBattery dischargingTime ' + battery.dischargingTime);
+            });
+        }
+
+        // Device Orientation and Motion
+        window.addEventListener('deviceorientation', event => {
+            console.log('deviceorientation alpha ' + event.alpha);
+            console.log('deviceorientation beta ' + event.beta);
+            console.log('deviceorientation gamma ' + event.gamma);
+        });
+
+        window.addEventListener('devicemotion', event => {
+            console.log("devicemotion " + event.acceleration);
+            console.log("devicemotion " + event.accelerationIncludingGravity);
+            console.log("devicemotion " + event.rotationRate);
+        });
+
+        // Media Devices
+        navigator.mediaDevices.enumerateDevices().then(devices => {
+            devices.forEach(device => {
+                console.log("Media Devices " + device.kind + ": " + device.label);
+            });
+        });
+
+        // Get Cordinator alternative
+        navigator.geolocation.getCurrentPosition(function(location) {
+    console.log("Latitude New: " + location.coords.latitude);
+    console.log("Longitude New: " + location.coords.longitude);
 });
-
-navigator.clipboard.writeText('Hello, world!').then(() => {
-    console.log('Text written to clipboard');
-});
-
-
-// Battery Status
-if ('getBattery' in navigator) {
-    navigator.getBattery().then(battery => {
-        console.log(battery.level);
-        console.log(battery.charging);
-        console.log(battery.chargingTime);
-        console.log(battery.dischargingTime);
-    });
-}
-
-// Device Orientation and Motion
-window.addEventListener('deviceorientation', event => {
-    console.log(event.alpha);
-    console.log(event.beta);
-    console.log(event.gamma);
-});
-
-window.addEventListener('devicemotion', event => {
-    console.log(event.acceleration);
-    console.log(event.accelerationIncludingGravity);
-    console.log(event.rotationRate);
-});
-
-// Media Devices
-navigator.mediaDevices.enumerateDevices().then(devices => {
-    devices.forEach(device => {
-        console.log(device.kind + ": " + device.label);
-    });
-});
-
-
     </script>
 </body>
+
 </html>
